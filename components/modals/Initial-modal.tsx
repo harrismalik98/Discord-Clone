@@ -8,6 +8,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { useEffect, useState } from "react";
+import FormUpload from "../file-upload";
 
 
 const formSchema = z.object({
@@ -48,7 +49,7 @@ const InitialModal = () => {
     }
 
 
-    
+
     return ( 
         <Dialog open>
             <DialogContent className="bg-white text-black p-0 overflow-hidden">
@@ -61,7 +62,14 @@ const InitialModal = () => {
                     <form className="space-y-8" onSubmit={form.handleSubmit(onSubmit)} >
                         <div className="space-y-8 px-6">
                             <div className="flex justify-center items-center text-center">
-                                TODO: Image Uplaod
+                                <FormField control={form.control} name="imageUrl" render={({field}) => (
+                                    <FormItem>
+                                        <FormControl>
+                                            <FormUpload endpoint="serverImage" value={field.value} onChange={field.onChange} />
+                                        </FormControl>
+                                    </FormItem>
+                                )}
+                                />
                             </div>
                         
 
@@ -75,11 +83,11 @@ const InitialModal = () => {
                                             disabled={isLoading}
                                             className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0"
                                             placeholder="Enter server name"
-                                            {...form} />
+                                            {...field} />
                                     </FormControl>
                                     <FormMessage/>
                                 </FormItem>
-                                )}
+                            )}
                             />
                         </div>
                         <DialogFooter className="bg-gray-100 px-6 py-4">
