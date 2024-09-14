@@ -1,6 +1,6 @@
 "use client"
 
-import { DialogHeader, Dialog, DialogContent, DialogTitle, DialogDescription, DialogFooter  } from "../ui/dialog";
+import { DialogHeader, Dialog, DialogContent, DialogTitle } from "../ui/dialog";
 
 import { useModal } from "@/hooks/use-modal-store";
 import { Label } from "../ui/label";
