@@ -5,7 +5,7 @@ import { Channel, ChannelType, MemberRole, Server } from "@prisma/client";
 import { Edit, Hash, Lock, Mic, Trash, Video } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import ActionTooltip from "../action-tooltip";
-import { useModal } from "@/hooks/use-modal-store";
+import { ModalType, useModal } from "@/hooks/use-modal-store";
 
 interface ServerChannelProps {
     channel:Channel,
@@ -27,10 +27,23 @@ const ServerChannel = ({channel, server, role}: ServerChannelProps) => {
     const params = useParams();
 
     const Icon = iconMap[channel.type];
+
+
+    const handleChannel = () => {
+        router.push(`/servers/${params?.serverId}/channels/${channel.id}`);
+    }
+
+
+    const onAction = (e:React.MouseEvent, action:ModalType) => {
+        e.stopPropagation();
+        onOpen(action, {server, channel});
+    }
+
+
     
     return ( 
         <button 
-            onClick={() => {}}
+            onClick={handleChannel}
             className={cn(
                 "group p-2 rounded-md flex items-center gap-x-2 w-full hover:bg-zinc-700/10 dark:hover:bg-zinc-700/50 transition",
                 params?.channelId === channel.id && "bg-zinc-700/20 dark:bg-zinc-700"
@@ -49,13 +62,13 @@ const ServerChannel = ({channel, server, role}: ServerChannelProps) => {
                 <div className="ml-auto flex items-center gap-x-2">
                     <ActionTooltip label="Edit" side="top" align="center">
                         <Edit 
-                            onClick={() => onOpen("editChannel", {server, channel})}
+                            onClick={(e) => onAction(e,"editChannel")}
                             className="hidden group-hover:block  w-4 h-4 text-zinc-500 hover:text-zinc-600 dark:text-zinc-400 dark:hover:text-zinc-300 transition"
                         />
                     </ActionTooltip>
                     <ActionTooltip label="Delete" side="top" align="center">
                         <Trash 
-                            onClick={() => onOpen("deleteChannel", {server, channel})} 
+                            onClick={(e) => onAction(e, "deleteChannel")}
                             className="hidden group-hover:block  w-4 h-4 text-zinc-500 hover:text-zinc-600 dark:text-zinc-400 dark:hover:text-zinc-300 transition"
                         />
                     </ActionTooltip>
@@ -64,7 +77,6 @@ const ServerChannel = ({channel, server, role}: ServerChannelProps) => {
             {channel.name === "general" && (
                 <Lock className="w-4 h-4 ml-auto text-zinc-500 dark:text-zinc-400" />
             )}
-
 
         </button>
      );
