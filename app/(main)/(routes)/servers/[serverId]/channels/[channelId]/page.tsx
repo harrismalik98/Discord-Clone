@@ -1,4 +1,5 @@
 import ChatHeader from "@/components/chat/chat-header";
+import ChatInput from "@/components/chat/chat-input";
 import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs/server";
@@ -43,8 +44,20 @@ const ChannelIdPage = async({params} : ChannelIdPageProps) => {
     
 
     return ( 
-        <div className="felx flex-col h-full bg-white dark:bg-[#313338]">
+        <div className="flex flex-col h-full bg-white dark:bg-[#313338]">
             <ChatHeader   serverId={channel.serverId}   name={channel.name}   type="channel" />
+            <div className="flex-1">
+                Future Message
+            </div>
+            <ChatInput 
+                name={channel.name}
+                type="channel"
+                apiUrl="/api/socket/messages"
+                query={{
+                    channelId: channel.id,
+                    serverId:  channel.serverId,
+                }}
+            />
         </div>
      );
 }
