@@ -4,7 +4,7 @@ import { Message } from "@prisma/client";
 import { NextResponse } from "next/server";
 
 
-const MESSAGES_BATCH = 15;
+const MESSAGES_BATCH = 10;
 
 export async function GET(req: Request) {
     try
