@@ -21,7 +21,7 @@ export const useChatScroll = ({chatRef, bottomRef, shouldLoadMore, loadMore, cou
             if(scrollTop === 0 && shouldLoadMore)
             {
                 loadMore();
-            }
+            }   
         };
 
         topDiv?.addEventListener("scroll", handleScroll);
@@ -61,6 +61,6 @@ export const useChatScroll = ({chatRef, bottomRef, shouldLoadMore, loadMore, cou
             }, 100)
         }
 
-    }, [bottomRef, chatRef, hasInitialized]);
+    }, [bottomRef, chatRef, hasInitialized, count]);
 
 };
