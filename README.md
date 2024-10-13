@@ -2,6 +2,8 @@
 
 This is a clone of the Discord web application built using Next.js 14 with a wide range of features and technologies to provide users with a robust chat and communication platform. It offers real-time messaging, multimedia support, voice and video calls, member management, server customization, and more.
 
+![Discord-Clone](https://github.com/user-attachments/assets/3df84f22-a0ae-4d90-a9d7-d91111d68a78)
+
 
 ## Features
 
